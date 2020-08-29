@@ -3,9 +3,9 @@ import random
 from datetime import datetime
 
 # CONSTANT
-FILENAME = 'tmp/writing_csv.csv'
-COLUMN_NAMES = ['employee_id', 'entered_at', 'enter_for']
-MAX_NUMBER_LOGS = 100
+FILENAME = 'tmp/10000logs_csv.csv'
+COLUMN_NAMES = ['employee_id', 'entered_at', 'enter_for', 'datetime']
+MAX_NUMBER_LOGS = 10000
 
 
 # FUNCTION
@@ -21,7 +21,10 @@ def fake_timestamp():
     now = datetime.now()
     now = now.replace(hour=random.randint(7,18), minute=random.randint(0,59))
     ts = datetime.timestamp(now)
-    return int(ts)
+    dt_object = datetime.fromtimestamp(int(ts))
+    return dt_object
+
+
 
 # IMPLEMENTATION FAKE CSV LOG
 with open(FILENAME, mode='w',newline='') as csv_file:
@@ -37,5 +40,5 @@ with open(FILENAME, mode='w',newline='') as csv_file:
             'employee_id': fake_employee_id(), 
             'entered_at': fake_timestamp(), 
             'enter_for': fake_enter_for()
-        })
+         })
         counter += 1  # or counter = counter + 1
